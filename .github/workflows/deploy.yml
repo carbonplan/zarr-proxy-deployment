@@ -15,7 +15,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
   SAM_CLI_TELEMETRY: 0 # Disable SAM CLI telemetry
-  ZARR_PROXY_STACK_NAME: zarr-proxy
+  ZARR_PROXY_STACK_NAME: zarr-proxy-deployment
   ZARR_PROXY_STACK_ENV: prod
   ZARR_PROXY_ENV: '{"ZARR_PROXY_PAYLOAD_SIZE_LIMIT": "6MB"}'
 
@@ -72,3 +72,12 @@ jobs:
       - name: Print CloudFormation template
         run: |
           yarn cdk synth
+
+      - name: Print the diff
+        run: |
+          yarn cdk diff
+
+      - name: Deploy
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          yarn cdk deploy ${{ env.ZARR_PROXY_STACK_NAME }}-${{ env.ZARR_PROXY_STACK_ENV }} --require-approval never

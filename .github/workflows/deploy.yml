@@ -80,4 +80,4 @@ jobs:
       - name: Deploy
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
-          yarn cdk deploy ${{ env.ZARR_PROXY_STACK_NAME }}-${{ env.ZARR_PROXY_STACK_ENV }} --require-approval never
+          yarn cdk deploy ${{ env.ZARR_PROXY_STACK_NAME }}-lambda-${{ env.ZARR_PROXY_STACK_ENV }} --require-approval never

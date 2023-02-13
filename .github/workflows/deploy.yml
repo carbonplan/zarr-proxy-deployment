@@ -15,6 +15,9 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
   SAM_CLI_TELEMETRY: 0 # Disable SAM CLI telemetry
+  ZARR_PROXY_STACK_NAME: zarr-proxy
+  ZARR_PROXY_STACK_ENV: prod
+  ZARR_PROXY_ENV: '{"ZARR_PROXY_PAYLOAD_SIZE_LIMIT": "6MB"}'
 
 jobs:
   deploy:

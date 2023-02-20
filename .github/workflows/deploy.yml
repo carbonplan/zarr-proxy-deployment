@@ -49,7 +49,7 @@ jobs:
           node-version: 16
 
       - name: Cache Yarn dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: yarn-cache
         with:
           path: ~/.cache/yarn
@@ -62,7 +62,7 @@ jobs:
           yarn install
 
       - name: Cache pip requirements
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         id: pip-cache
         with:
           path: ~/.cache/pip

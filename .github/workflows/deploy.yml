@@ -96,6 +96,6 @@ jobs:
           yarn cdk diff
 
       - name: Deploy
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'workflow_dispatch'
         run: |
           yarn cdk deploy ${{ env.ZARR_PROXY_STACK_NAME }}-lambda-${{ env.ZARR_PROXY_STACK_ENV }} --require-approval never
